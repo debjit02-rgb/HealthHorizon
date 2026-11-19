@@ -101,7 +101,32 @@ This single command automatically:
 
 ## 5. Usage Guide
 
-### A. Training the Model (`train.py`)
+### A. Small Real-Data NIH Test
+
+The repository includes a small downloader for a first real-data test. It
+downloads metadata and a patient-unique sample of NIH ChestX-ray14 images; it
+does not download the complete 40+ GB archive:
+
+```bash
+python download_real_sample.py
+python train.py \
+    --metadata data/real_sample/metadata.csv \
+    --image_dir data/real_sample/images \
+    --epochs 2 \
+    --batch_size 8 \
+    --output_model checkpoints/real_sample_best.h5 \
+    --output_history outputs/real_sample_history.json
+python evaluate.py \
+    --model checkpoints/real_sample_best.h5 \
+    --test_csv outputs/splits/test.csv \
+    --output_dir outputs/real_sample_evaluation
+```
+
+This small run is intended to verify the pipeline with real images. Its
+metrics are not statistically reliable because the sample is deliberately
+small. The downloaded images and generated model files are excluded from Git.
+
+### B. Training the Model (`train.py`)
 
 To train on your own NIH ChestX-ray14 dataset or a custom subset:
 ```bash
@@ -120,7 +145,7 @@ If you don't have the dataset locally yet, pass `--sample_run`:
 python train.py --sample_run --epochs 3 --batch_size 8
 ```
 
-### B. Evaluating the Model (`evaluate.py`)
+### C. Evaluating the Model (`evaluate.py`)
 
 Run quantitative evaluation and generate all visual plots:
 ```bash
@@ -138,7 +163,7 @@ Generated outputs:
 - `outputs/evaluation_report.md`
 - `outputs/evaluation_metrics.json`
 
-### C. Command-Line Prediction (`predict.py`)
+### D. Command-Line Prediction (`predict.py`)
 
 Predict pneumonia probability for an individual chest X-ray image:
 
