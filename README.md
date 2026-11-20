@@ -52,6 +52,7 @@ HealthHorizon/
 ├── predict.py              # CLI prediction tool for single radiographs
 ├── demo.py                 # Self-contained one-command reviewer demo
 ├── demo.ipynb              # Jupyter / Colab interactive demonstration notebook
+├── results/                # Small real-data test metrics and visualizations
 ├── requirements.txt        # Python dependency manifest
 ├── README.md               # Complete project documentation and guide
 └── .gitignore              # Ignores venvs, cache, large checkpoints, datasets
@@ -125,6 +126,7 @@ python evaluate.py \
 This small run is intended to verify the pipeline with real images. Its
 metrics are not statistically reliable because the sample is deliberately
 small. The downloaded images and generated model files are excluded from Git.
+The committed summary and plots are available in [`results/`](results/).
 
 ### B. Training the Model (`train.py`)
 
